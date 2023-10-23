@@ -1,4 +1,4 @@
-![Build application](https://github.com/learning-process/parallel_programming_course/workflows/Build%20application/badge.svg?branch=master)
+![Build application](https://github.com/learning-process/ppc-2023-mpi/workflows/Build%20application/badge.svg?branch=master)
 
 # Parallel Programming Course
 
