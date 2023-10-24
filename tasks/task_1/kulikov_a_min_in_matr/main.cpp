@@ -1,11 +1,12 @@
+// Copyright 2023 Kulikov Artem
+#include <vector>
 #include <gtest/gtest.h>
 
 #include <boost/mpi/communicator.hpp>
 #include <boost/mpi/environment.hpp>
 #include <boost/serialization/vector.hpp>
-#include <vector>
 
-#include "min_in_matr.h"
+#include "./min_in_matr.h"
 
 TEST(Parallel_Min_In_Matrix_MPI, Test_Random) {
     boost::mpi::communicator world;

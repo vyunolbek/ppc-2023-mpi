@@ -1,12 +1,13 @@
+// Copyright 2023 Kulikov Artem
 #include "min_in_matr.h"
 
 #include <algorithm>
-#include <boost/mpi/collectives.hpp>
-#include <boost/mpi/communicator.hpp>
 #include <functional>
 #include <random>
 #include <string>
 #include <vector>
+#include <boost/mpi/collectives.hpp>
+#include <boost/mpi/communicator.hpp>
 
 std::vector<int> getRandomMatrix(int m, int n) {
     std::random_device dev;
