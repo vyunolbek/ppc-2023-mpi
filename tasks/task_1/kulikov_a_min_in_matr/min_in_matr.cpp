@@ -1,5 +1,5 @@
 // Copyright 2023 Kulikov Artem
-#include "./min_in_matr.h"
+#include "task_1/kulikov_a_min_in_matr/min_in_matr.h"
 
 #include <algorithm>
 #include <functional>
