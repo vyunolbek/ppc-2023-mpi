@@ -1,6 +1,6 @@
 // Copyright 2023 Kulikov Artem
-#include <vector>
 #include <gtest/gtest.h>
+#include <vector>
 
 #include <boost/mpi/communicator.hpp>
 #include <boost/mpi/environment.hpp>
