@@ -1,14 +1,12 @@
-//
-// Created by atikin on 26.10.23.
-//
+#ifndef TASKS_KULIKOV_A_MIN_IN_MATR_H_
+#define TASKS_KULIKOV_A_MIN_IN_MATR_H_
 
-#ifndef PPC_2023_MPI_INT_TR_H
-#define PPC_2023_MPI_INT_TR_H
+typedef double (*func)(double);
 
+double function(double x);
 
-class int_tr {
+double trapezium(double a, double b, func f);
 
-};
+double getParallelOperations(double a, double b, int N, func f);
 
-
-#endif //PPC_2023_MPI_INT_TR_H
+#endif  // TASKS_KULIKOV_A_MIN_IN_MATR_H_
