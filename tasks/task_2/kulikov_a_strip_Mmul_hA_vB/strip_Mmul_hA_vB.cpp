@@ -1,4 +1,5 @@
 // Copyright 2023 Kulikov Artem
+#include <vector>
 #include <string>
 #include <random>
 #include <algorithm>

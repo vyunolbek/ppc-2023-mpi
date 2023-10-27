@@ -2,6 +2,7 @@
 #ifndef TASKS_TASK_2_KULIKOV_A_STRIP_MMUL_HA_VB_STRIP_MMUL_HA_VB_H_
 #define TASKS_TASK_2_KULIKOV_A_STRIP_MMUL_HA_VB_STRIP_MMUL_HA_VB_H_
 
+#include <vector>
 #include <boost/serialization/vector.hpp>
 
 std::vector<int> getRandomMatrix(int n);
