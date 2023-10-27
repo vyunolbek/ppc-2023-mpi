@@ -59,6 +59,7 @@ endif( USE_PERF_MODE )
 ############################## Modules ##############################
 include(cmake/boost.cmake)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
 include_directories(3rdparty)
 include_directories(modules)
 include_directories(tasks)
