@@ -5,34 +5,76 @@
 #include <vector>
 
 #include "int_tr.h"
+#define ESTIMATE 0.00001
 
-TEST(Parallel_Min_In_Matrix_MPI, Test_Random) {
+TEST(Parallel_Integral, sin) {
     boost::mpi::communicator world;
-    const int N = 100000000;
-    const double a = 1, b = 10;
+    const int N = 100000;
+    const double a = 1, b = 11;
+    const double real_var = 0.535876607880088;
 
-    double global_sum = getParallelOperations(a, b, N, function);
+    double global_sum = getParallelOperations(a, b, N, sin_f);
 
     if (world.rank() == 0) {
-//        int reference_sum = getSequentialOperations(global_vec, "+");
-        std::cout << "Proc id = " << world.rank() << " global_sum = " << global_sum << std::endl;
+        ASSERT_LT(std::abs(real_var - global_sum), ESTIMATE);
     }
 }
 
-TEST(Parallel_Min_In_Matrix_MPI, Test_Random2) {
-    ASSERT_EQ(1, 1);
+TEST(Parallel_Integral, hard_fun) {
+    boost::mpi::communicator world;
+    const int N = 100000;
+    const double a = -0.75;
+    const double b = 1;
+    const double real_var = -2.27207793864214;
+
+
+    double global_sum = getParallelOperations(a, b, N, hardfn_f);
+
+    if (world.rank() == 0) {
+        ASSERT_LT(std::abs(real_var - global_sum), ESTIMATE);
+    }
 }
 
-TEST(Parallel_Min_In_Matrix_MPI, Test_Manual) {
-    ASSERT_EQ(1, 1);
+TEST(Parallel_Integral, sin_2) {
+    boost::mpi::communicator world;
+    const int N = 1000000;
+    const double a = -1;
+    const double b = 1.56;
+    const double real_var = 90.77507881491248;
+
+    double global_sum = getParallelOperations(a, b, N, sin2_f);
+
+    if (world.rank() == 0) {
+        ASSERT_LT(std::abs(real_var - global_sum), ESTIMATE);
+    }
 }
 
-TEST(Parallel_Min_In_Matrix_MPI, Test_ManualOneRow) {
-    ASSERT_EQ(1, 1);
+TEST(Parallel_Integral, hard_fun_2) {
+    boost::mpi::communicator world;
+    const int N = 1000000;
+    const double a = -5;
+    const double b = -2.2;
+    const double real_var = 0.00201953418482;
+
+    double global_sum = getParallelOperations(a, b, N, hardfn2_f);
+
+    if (world.rank() == 0) {
+        ASSERT_LT(std::abs(real_var - global_sum), ESTIMATE);
+    }
 }
 
-TEST(Parallel_Min_In_Matrix_MPI, Test_ManualAllEQ) {
-    ASSERT_EQ(1, 1);
+TEST(Parallel_Integral, sin_cos) {
+    boost::mpi::communicator world;
+    const int N = 1000000;
+    const double a = 16.54;
+    const double b = 20;
+    const double real_var = -0.124428146857;
+
+    double global_sum = getParallelOperations(a, b, N, sin_cos_f);
+
+    if (world.rank() == 0) {
+        ASSERT_LT(std::abs(real_var - global_sum), ESTIMATE);
+    }
 }
 
 int main(int argc, char** argv) {

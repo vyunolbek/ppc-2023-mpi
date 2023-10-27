@@ -3,13 +3,13 @@
 #include <boost/mpi/communicator.hpp>
 #include <boost/mpi/collectives.hpp>
 
-double function(double x){
-    return sin(x);
-}
+double sin_f(double x){ return sin(x); }
+double sin2_f(double x){ return sin(x) / (1 - std::pow(sin(x), 2)); }
+double hardfn_f(double x){ return 3*x / std::sqrt(std::pow(x + 1, 3)); }
+double hardfn2_f(double x){ return (std::pow(x, 2) + 2 * x - 3) / std::pow(x, 4); }
+double sin_cos_f(double x){ return sin(x) * std::pow(cos(x), 2); }
 
-double trapezium(double a, double b, func f){
-    return (f(a)+f(b))*(b-a)/2;
-}
+double trapezium(double a, double b, func f){ return (f(a)+f(b))*std::abs(b-a)/2; }
 
 double get_area(double a, func f, int steps_count, double step){
     double res = 0;
@@ -21,15 +21,12 @@ double get_area(double a, func f, int steps_count, double step){
 
 double getParallelOperations(double a, double b, int N, func f) {
     boost::mpi::communicator world;
-    const double slice_count = (b-a) / world.size();
-    const double step = (b-a) / N;
+    const double step = std::abs(b-a) / N;
     const int steps_count = N / world.size();
-
-    std::cout << "slice_count = " << slice_count << std::endl;
 
     if (world.rank() == 0) {
         for (int proc = 1; proc < world.size(); proc++) {
-            world.send(proc, 0, a + slice_count * proc);
+            world.send(proc, 0, a + steps_count * step * proc);
         }
     }
 
@@ -39,10 +36,14 @@ double getParallelOperations(double a, double b, int N, func f) {
     } else {
         world.recv(0, 0, local_val);
     }
-//
     double global_area = 0;
-//    std::cout << "Proc id = " << world.rank() << " start_val = " << local_val << " end_val = " << local_val + step <<std::endl;
-    double local_area = get_area(local_val, f, steps_count, step);
+    double local_area = 0;
+
+    if (world.rank() == world.size() - 1){
+        local_area = get_area(local_val, f, steps_count + N - steps_count * world.size(), step);
+    } else {
+        local_area = get_area(local_val, f, steps_count, step);
+    }
     reduce(world, local_area, global_area, std::plus<double>(), 0);
     return global_area;
 }
