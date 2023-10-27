@@ -1,10 +1,8 @@
+// Copyright 2023 Ivanov Nikita
 #include <gtest/gtest.h>
-
 #include <boost/mpi/communicator.hpp>
 #include <boost/mpi/environment.hpp>
-#include <vector>
-
-#include "int_tr.h"
+#include "task_1/ivanov_int_tr/int_tr.h"
 #define ESTIMATE 0.00001
 
 TEST(Parallel_Integral, sin) {

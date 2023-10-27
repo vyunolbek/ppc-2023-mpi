@@ -1,5 +1,6 @@
-#ifndef TASKS_IVANOV_INT_TR_H_
-#define TASKS_IVANOV_INT_TR_H_
+// Copyright 2023 Ivanov Nikita
+#ifndef TASKS_TASK_1_IVANOV_INT_TR_INT_TR_H_
+#define TASKS_TASK_1_IVANOV_INT_TR_INT_TR_H_
 
 typedef double (*func)(double);
 
@@ -15,4 +16,4 @@ double getParallelOperations(double a, double b, int N, func f);
 
 double get_area(double a, func f, int steps_count, double step);
 
-#endif  // TASKS_IVANOV_INT_TR_H_
+#endif  // TASKS_TASK_1_IVANOV_INT_TR_INT_TR_H_
