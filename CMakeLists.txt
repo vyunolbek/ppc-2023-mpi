@@ -59,9 +59,6 @@ endif( USE_PERF_MODE )
 ############################## Modules ##############################
 include(cmake/boost.cmake)
 
-if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
-endif()
 include_directories(3rdparty)
 include_directories(modules)
 include_directories(tasks)
