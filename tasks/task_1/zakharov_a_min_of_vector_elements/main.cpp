@@ -1,10 +1,11 @@
+// Copyright 2023 Zakharov Artem
 #include <gtest/gtest.h>
 #include <vector>
 #include <boost/mpi/environment.hpp>
 #include <boost/mpi/communicator.hpp>
-#include "min_vector_elements.h"
+#include "./min_vector_elements.h"
 
-TEST(Min_Vector_Elements, Test_random){
+TEST(Min_Vector_Elements, Test_random) {
     boost::mpi::communicator world;
     std::vector<int> vec;
     const size_t vec_size = 101;
@@ -21,7 +22,7 @@ TEST(Min_Vector_Elements, Test_random){
     }
 }
 
-TEST(Min_Vector_Elements, Test_random_only_poistive){
+TEST(Min_Vector_Elements, Test_random_only_poistive) {
     boost::mpi::communicator world;
     std::vector<int> vec;
     const size_t vec_size = 97;
@@ -37,7 +38,7 @@ TEST(Min_Vector_Elements, Test_random_only_poistive){
     }
 }
 
-TEST(Min_Vector_Elements, Test_random_only_negative){
+TEST(Min_Vector_Elements, Test_random_only_negative) {
     boost::mpi::communicator world;
     std::vector<int> vec;
     const size_t vec_size = 105;
@@ -53,7 +54,7 @@ TEST(Min_Vector_Elements, Test_random_only_negative){
     }
 }
 
-TEST(Min_Vector_Elements, Test_identical_elements){
+TEST(Min_Vector_Elements, Test_identical_elements) {
     boost::mpi::communicator world;
     std::vector<int> vec;
     const size_t vec_size = 20;
@@ -69,7 +70,7 @@ TEST(Min_Vector_Elements, Test_identical_elements){
     }
 }
 
-TEST(Min_Vector_Elements, Test_several_min){
+TEST(Min_Vector_Elements, Test_several_min) {
     boost::mpi::communicator world;
     std::vector<int> vec;
     const size_t vec_size = 10;
@@ -85,7 +86,7 @@ TEST(Min_Vector_Elements, Test_several_min){
     }
 }
 
-TEST(Min_Vector_Elements, Test_one_element){
+TEST(Min_Vector_Elements, Test_one_element) {
     boost::mpi::communicator world;
     std::vector<int> vec;
     const size_t vec_size = 1;
