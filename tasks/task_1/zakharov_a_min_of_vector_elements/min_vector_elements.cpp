@@ -1,4 +1,3 @@
-#include <vector>
 #include <random>
 #include <boost/mpi/communicator.hpp>
 #include <boost/mpi/collectives.hpp>

@@ -1,7 +1,3 @@
-//
-// Created by Artem on 28.10.2023.
-//
-
 #ifndef PPC_2023_MPI_MIN_VECTOR_ELEMENTS_H
 #define PPC_2023_MPI_MIN_VECTOR_ELEMENTS_H
 
