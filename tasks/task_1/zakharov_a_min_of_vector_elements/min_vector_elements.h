@@ -10,5 +10,6 @@
 #include <vector>
 
 int get_min_element(const std::vector<int>& init_vec, size_t vec_size);
+std::vector<int> get_random_vector(size_t size, int min_elem = -1000, int max_elem = 1000);
 
 
