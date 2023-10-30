@@ -1,7 +1,7 @@
-// Copyright 2023 Kuznetsov Artyom
+// Copyright 2023 Kuznetsov Artem
 #include "most_different.h"
 
-std::vector<int> createRandomArray(size_t size, int low, int up) {
+std::vector<int> create_random_array(size_t size, int low, int up) {
   std::mt19937 gen(std::random_device{}());
   std::uniform_int_distribution<int> dist(low, up);
 
@@ -11,55 +11,55 @@ std::vector<int> createRandomArray(size_t size, int low, int up) {
   return arr;
 }
 
-int sequentialFindMostDifferent(const std::vector<int>& arr) {
+int seq_find_most_different(const std::vector<int>& arr) {
   size_t size = arr.size();
-  int maxDiff = -1;
+  int max_diff = -1;
 
   if (size >= 2) {
-    int absDiff = 0;
+    int abs_diff = 0;
     for (size_t i = 0; i < size - 1; ++i) {
-      absDiff = abs(arr[i] - arr[i + 1]);
-      if (absDiff > maxDiff) maxDiff = absDiff;
+      abs_diff = abs(arr[i] - arr[i + 1]);
+      if (abs_diff > max_diff) max_diff = abs_diff;
     }
   }
-  return maxDiff;
+  return max_diff;
 }
 
-int parallelFindMostDifferent(const std::vector<int>& arr) {
-  int sizeWorld = 0;
+int par_find_most_different(const std::vector<int>& arr) {
+  int size_world = 0;
   int rank = 0;
-  size_t sizeArr = arr.size();
+  size_t size_arr = arr.size();
 
-  if (sizeArr < 2) return -1;
+  if (size_arr < 2) return -1;
 
-  MPI_Comm_size(MPI_COMM_WORLD, &sizeWorld);
+  MPI_Comm_size(MPI_COMM_WORLD, &size_world);
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-  const int chunk = static_cast<int>(sizeArr / sizeWorld);
-  const int tail = static_cast<int>(sizeArr % sizeWorld);
+  const int chunk = static_cast<int>(size_arr / size_world);
+  const int tail = static_cast<int>(size_arr % size_world);
 
-  std::vector<int> sendCount(sizeWorld);
-  std::vector<int> displs(sizeWorld);
+  std::vector<int> send_counts(size_world);
+  std::vector<int> displs(size_world);
 
-  for (int i = 0; i < sizeWorld - 1; ++i) {
-    sendCount[i] = chunk + 1;
+  for (int i = 0; i < size_world - 1; ++i) {
+    send_counts[i] = chunk + 1;
     displs[i] = i * chunk;
   }
 
-  sendCount[sizeWorld - 1] =
-      static_cast<int>((tail == 0) ? chunk : sizeArr - (sizeWorld - 1) * chunk);
-  displs[sizeWorld - 1] = (sizeWorld - 1) * chunk;
+  send_counts[size_world - 1] = static_cast<int>(
+      (tail == 0) ? chunk : size_arr - (size_world - 1) * chunk);
+  displs[size_world - 1] = (size_world - 1) * chunk;
 
-  int globMaxDiff = 0;
-  std::vector<int> localArr(sendCount[rank]);
+  int global_max_diff = 0;
+  std::vector<int> local_arr(send_counts[rank]);
 
-  MPI_Scatterv(arr.data(), sendCount.data(), displs.data(), MPI_INT,
-               localArr.data(), sendCount[rank], MPI_INT, 0, MPI_COMM_WORLD);
+  MPI_Scatterv(arr.data(), send_counts.data(), displs.data(), MPI_INT,
+               local_arr.data(), send_counts[rank], MPI_INT, 0, MPI_COMM_WORLD);
 
-  int localMaxDiff = sequentialFindMostDifferent(localArr);
+  int local_max_diff = seq_find_most_different(local_arr);
 
-  MPI_Reduce(&localMaxDiff, &globMaxDiff, 1, MPI_INT, MPI_MAX, 0,
+  MPI_Reduce(&local_max_diff, &global_max_diff, 1, MPI_INT, MPI_MAX, 0,
              MPI_COMM_WORLD);
 
-  return globMaxDiff;
+  return global_max_diff;
 }
