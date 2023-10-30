@@ -76,11 +76,15 @@ TEST(MPI_TESTS, Test_random) {
 }
 
 int main(int argc, char** argv) {
-  ::testing::InitGoogleTest(&argc, argv);
-  MPI_Init(&argc, &argv);
+  int result = 0;
 
+  ::testing::InitGoogleTest(&argc, argv);
   ::testing::TestEventListeners& listeners =
       ::testing::UnitTest::GetInstance()->listeners();
 
-  return RUN_ALL_TESTS();
+  MPI_Init(&argc, &argv);
+  result = RUN_ALL_TESTS();
+  MPI_Finalize();
+
+  return result;
 }
