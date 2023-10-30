@@ -2,7 +2,8 @@
 #include "task_1/kuznetsov_a_most_different_values/most_different.h"
 
 std::vector<int> create_random_array(size_t size, int low, int up) {
-  std::mt19937 gen(std::random_device{}());
+  std::random_device rd;
+  std::mt19937 gen(rd());
   std::uniform_int_distribution<int> dist(low, up);
 
   std::vector<int> arr(size);
