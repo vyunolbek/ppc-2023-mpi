@@ -1,9 +1,6 @@
 // Copyright 2023 Kuznetsov Artem
 #include <gtest/gtest.h>
 
-#include <algorithm>
-#include <vector>
-
 #include "./most_different.h"
 
 TEST(MPI_TESTS, Test_small) {
