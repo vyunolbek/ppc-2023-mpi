@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <vector>
 
-#include "most_different.h"
+#include "./most_different.h"
 
 TEST(MPI_TESTS, Test_small) {
   int rank = 0;

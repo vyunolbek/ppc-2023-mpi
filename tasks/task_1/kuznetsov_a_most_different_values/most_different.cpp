@@ -1,5 +1,5 @@
 // Copyright 2023 Kuznetsov Artem
-#include "most_different.h"
+#include "task_1/kuznetsov_a_most_different_values/most_different.h"
 
 std::vector<int> create_random_array(size_t size, int low, int up) {
   std::mt19937 gen(std::random_device{}());
