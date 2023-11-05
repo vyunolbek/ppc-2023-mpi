@@ -2,19 +2,16 @@
 
 #include "task_1/kulaev_e_vector_sum/vector_sum.h"
 
-int sumSeq(const std::vector<int> &vec)
-{
+int sumSeq(const std::vector<int> &vec) {
     int total = 0;
-    for (int i = 0; i < vec.size(); i++)
-    {
+    for (int i = 0; i < vec.size(); i++) {
         total += vec[i];
     }
 
     return total;
 }
 
-int sumPar(const std::vector<int> &vec)
-{
+int sumPar(const std::vector<int> &vec) {
     int numProc;
     MPI_Comm_size(MPI_COMM_WORLD, &numProc);
 
@@ -29,18 +26,17 @@ int sumPar(const std::vector<int> &vec)
     int chunk_size = vecSize / numProc;
     int remainder = vecSize % numProc;
 
-    for (int i = 0; i < numProc; i++)
-    {
+    for (int i = 0; i < numProc; i++) {
         recv_counts[i] = chunk_size;
-        if (i < remainder)
-        {
+        if (i < remainder) {
             recv_counts[i]++;
         }
         displs[i] = (i > 0) ? (displs[i - 1] + recv_counts[i - 1]) : 0;
     }
 
     std::vector<int> recv_data(recv_counts[rankProc]);
-    MPI_Scatterv(vec.data(), recv_counts.data(), displs.data(), MPI_INT, recv_data.data(), recv_counts[rankProc], MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Scatterv(vec.data(), recv_counts.data(), displs.data(), MPI_INT, recv_data.data(),
+                recv_counts[rankProc], MPI_INT, 0, MPI_COMM_WORLD);
 
     int localSum = sumSeq(recv_data);
     int globalSum = 0;
@@ -50,8 +46,7 @@ int sumPar(const std::vector<int> &vec)
     return globalSum;
 }
 
-int generateRandomNumbers(int min, int max)
-{
+int generateRandomNumbers(int min, int max) {
     int randomNumber = min + (std::rand() % (max - min + 1));
 
     return randomNumber;

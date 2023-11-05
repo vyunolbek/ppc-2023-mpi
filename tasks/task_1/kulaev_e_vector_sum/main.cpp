@@ -1,12 +1,10 @@
 // Copyright 2023 Kulaev Eugene
-#include <iostream>
 #include <gtest/gtest.h>
 #include <mpi.h>
-
+#include <iostream>
 #include "./vector_sum.h"
 
-TEST(Parallel_Vector_Sum, Test_only_1)
-{
+TEST(Parallel_Vector_Sum, Test_only_1) {
     int rankProc = 0;
     int numProc = 0;
 
@@ -17,15 +15,13 @@ TEST(Parallel_Vector_Sum, Test_only_1)
 
     int result = sumPar(vec);
 
-    if (rankProc == 0)
-    {
+    if (rankProc == 0) {
         int resSeq = sumSeq(vec);
         ASSERT_EQ(result, resSeq);
     }
 }
 
-TEST(Parallel_Vector_Sum, Test_only_0)
-{
+TEST(Parallel_Vector_Sum, Test_only_0) {
     int rankProc = 0;
     int numProc = 0;
 
@@ -36,15 +32,13 @@ TEST(Parallel_Vector_Sum, Test_only_0)
 
     int result = sumPar(vec);
 
-    if (rankProc == 0)
-    {
+    if (rankProc == 0) {
         int resSeq = sumSeq(vec);
         ASSERT_EQ(result, resSeq);
     }
 }
 
-TEST(Parallel_Vector_Sum, Test_not_elems)
-{
+TEST(Parallel_Vector_Sum, Test_not_elems) {
     int rankProc = 0;
     int numProc = 0;
 
@@ -54,15 +48,13 @@ TEST(Parallel_Vector_Sum, Test_not_elems)
     std::vector<int> vec{};
     int result = sumPar(vec);
 
-    if (rankProc == 0)
-    {
+    if (rankProc == 0) {
         int resSeq = sumSeq(vec);
         ASSERT_EQ(result, resSeq);
     }
 }
 
-TEST(Parallel_Vector_Sum, Test_random_elems)
-{
+TEST(Parallel_Vector_Sum, Test_random_elems) {
     int rankProc = 0;
     int numProc = 0;
 
@@ -75,15 +67,13 @@ TEST(Parallel_Vector_Sum, Test_random_elems)
 
     int result = sumPar(vec);
 
-    if (rankProc == 0)
-    {
+    if (rankProc == 0) {
         int resSeq = sumSeq(vec);
         ASSERT_EQ(result, resSeq);
     }
 }
 
-TEST(Parallel_Vector_Sum, Test_half_elems)
-{
+TEST(Parallel_Vector_Sum, Test_half_elems) {
     int rankProc = 0;
     int numProc = 0;
 
@@ -94,15 +84,13 @@ TEST(Parallel_Vector_Sum, Test_half_elems)
 
     int result = sumPar(vec);
 
-    if (rankProc == 0)
-    {
+    if (rankProc == 0) {
         int resSeq = sumSeq(vec);
         ASSERT_EQ(result, resSeq);
     }
 }
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
     int result_code = 0;
 
     ::testing::InitGoogleTest(&argc, argv);
