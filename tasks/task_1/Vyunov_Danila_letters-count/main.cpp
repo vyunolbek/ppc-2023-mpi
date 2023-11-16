@@ -87,8 +87,8 @@ int main(int argc, char** argv) {
     if (rank != 0) {
         delete listeners.Release(listeners.default_result_printer());
     }
-    return RUN_ALL_TESTS();
+    int result = RUN_ALL_TESTS();
 
   MPI_Finalize();
-  return 0;
+  return result;
 }
