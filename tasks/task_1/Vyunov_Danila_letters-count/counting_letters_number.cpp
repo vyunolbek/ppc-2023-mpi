@@ -1,5 +1,5 @@
 // Copyright 2023 Vyunov Danila
-#include "/home/vyunov/ppc-2023-mpi/tasks/task_1/Vyunov_Danila_letters-count/counting_letters_number.h"
+#include "../tasks/task_1/Vyunov_Danila_letters-count/counting_letters_number.h"
 
 std::string CreateRandomStr(size_t size) {
   std::string str;
