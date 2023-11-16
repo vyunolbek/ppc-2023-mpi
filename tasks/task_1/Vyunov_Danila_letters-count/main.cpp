@@ -79,23 +79,15 @@ TEST(Parallel_Operations_MPI, Test_No_Letters_Str) {
 }
 
 int main(int argc, char** argv) {
-  // MPI_Init(&argc, &argv);
-  //     int rank;
-  //   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-  //   ::testing::InitGoogleTest(&argc, argv);
-  //   ::testing::TestEventListeners& listeners = ::testing::UnitTest::GetInstance()->listeners();
-  //   if (rank != 0) {
-  //       delete listeners.Release(listeners.default_result_printer());
-  //   }
-  //   return RUN_ALL_TESTS();
-
   MPI_Init(&argc, &argv);
-  int rank;
-  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-
-  std::string str = "qwertyui1";
-  int count = CountingLettersParallel(str);
-  std::cout << count << std::endl;
+      int rank;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    ::testing::InitGoogleTest(&argc, argv);
+    ::testing::TestEventListeners& listeners = ::testing::UnitTest::GetInstance()->listeners();
+    if (rank != 0) {
+        delete listeners.Release(listeners.default_result_printer());
+    }
+    return RUN_ALL_TESTS();
 
   return 0;
 }
