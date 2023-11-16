@@ -1,4 +1,4 @@
-// Copyright 2021 Kamenev Ilya
+// Copyright 2023 Vyunov Danila
 
 #include <gtest/gtest.h>
 #include "/home/vyunov/ppc-2023-mpi/tasks/task_1/Vyunov_Danila_letters-count/counting_letters_number.h"
