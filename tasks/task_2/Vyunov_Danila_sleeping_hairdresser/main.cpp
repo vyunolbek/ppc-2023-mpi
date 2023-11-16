@@ -86,5 +86,8 @@ int main(int argc, char** argv) {
         delete listeners.Release(listeners.default_result_printer());
     }
     int result = RUN_ALL_TESTS();
+
+    MPI_Finalize();
+
     return result;
 }
