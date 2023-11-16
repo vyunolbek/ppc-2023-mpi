@@ -1,7 +1,7 @@
 // Copyright 2023 Vyunov Danila
 
 #include <gtest/gtest.h>
-#include "/home/vyunov/ppc-2023-mpi/tasks/task_1/Vyunov_Danila_letters-count/counting_letters_number.h"
+#include "../tasks/task_1/Vyunov_Danila_letters-count/counting_letters_number.h"
 // #include <gtest-mpi-listener.hpp>
 
 TEST(Parallel_Operations_MPI, Test_Empty_Random_Str) {
